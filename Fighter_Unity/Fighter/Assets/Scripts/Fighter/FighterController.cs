@@ -69,30 +69,20 @@ public class FighterController : GameObjectController{
 
 		this.facingRight = true;
 
-		Mesh mesh = new Mesh ();
 
-		Vector3[] vertices = new Vector3[this.spriteRenderer.sprite.vertices.GetLength(0)];
 
-		for (int i = 0; i < this.spriteRenderer.sprite.vertices.GetLength(0); i++) {
-			vertices[i] = this.spriteRenderer.sprite.vertices[i];
-		}
 
-		mesh.vertices = vertices;
 
-		int[] triangles = new int[this.spriteRenderer.sprite.triangles.GetLength(0)];
 
-		for (int i = 0; i < this.spriteRenderer.sprite.triangles.GetLength(0); i++) {
-			triangles[i] = this.spriteRenderer.sprite.triangles[i];
-		}
 
-		mesh.triangles = triangles;
 
-		this.GetComponent<MeshFilter> ().mesh = mesh;
+
 
 	}
 	
 	void Update () {
 
+		//this.transform.Find("Aura").GetComponent<ParticleSystemRenderer>().mesh = GetMeshFromSprite();
 
 		if (this.jumpState == JumpState.True && this.GroundFlag) {
 		} else {
@@ -239,6 +229,25 @@ public class FighterController : GameObjectController{
 		
 		this.blockState = BlockState.False;
 		
+	}
+
+	protected Mesh GetMeshFromSprite ()
+	{
+		Mesh mesh = new Mesh ();
+
+		Vector3[] vertices = new Vector3[this.spriteRenderer.sprite.vertices.GetLength (0)];
+		for (int i = 0; i < this.spriteRenderer.sprite.vertices.GetLength (0); i++) {
+			vertices [i] = this.spriteRenderer.sprite.vertices [i];
+		}
+		mesh.vertices = vertices;
+
+		int[] triangles = new int[this.spriteRenderer.sprite.triangles.GetLength (0)];
+		for (int i = 0; i < this.spriteRenderer.sprite.triangles.GetLength (0); i++) {
+			triangles [i] = this.spriteRenderer.sprite.triangles [i];
+		}
+		mesh.triangles = triangles;
+		return mesh;
+
 	}
 }
 
