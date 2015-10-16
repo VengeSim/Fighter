@@ -1,0 +1,2 @@
+##5/10/15
+Move the character on the terrain meshCollider plane normals, you can get the normals with a hit from raycast
