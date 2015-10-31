@@ -5,21 +5,19 @@ using System.Diagnostics;
 
 
 
-public enum LoopState{
+public enum LoopState
+{
 	Stop, 
 	Run,
 	Pause
-
-
-
 }
 
 
 
-public class FrameLoop : MonoBehaviour {
+public class TurnLoop : MonoBehaviour {
 
-	public float FrameSpeed;
-	public int FrameID;
+	public float TurnSpeed;
+	public int TurnID;
 	public LoopState LoopState;
 	[Space(10)]
 	public Stopwatch GlobalStopWatch;
@@ -37,7 +35,7 @@ public class FrameLoop : MonoBehaviour {
 	{
 
 		LoopState = LoopState.Stop;
-		FrameID = 0;
+		TurnID = 0;
 
 		GlobalStopWatch = new Stopwatch();
 
@@ -50,7 +48,7 @@ public class FrameLoop : MonoBehaviour {
 
 	void OnGUI () 
 	{
-		GUILayout.Label (String.Format("Frame ID = {0}", FrameID));
+		GUILayout.Label (String.Format("Turn ID = {0}", TurnID));
 	}
 
 	IEnumerator Loop() 
@@ -60,18 +58,18 @@ public class FrameLoop : MonoBehaviour {
 
 			if(LoopState == LoopState.Run)
 			{
-				FrameID++;
+				TurnID++;
 
 				if(PreTick != null){PreTick.Invoke();}
 				if(Tick != null){Tick.Invoke();}
 				if(PostTick != null){PostTick.Invoke();}
 
-				yield return new WaitForSeconds(FrameSpeed);
+				yield return new WaitForSeconds(TurnSpeed);
 
 			}
 			if(LoopState == LoopState.Pause)
 			{
-				yield return new WaitForSeconds(FrameSpeed);
+				yield return new WaitForSeconds(TurnSpeed);
 			}
 			if(LoopState == LoopState.Stop)
 			{

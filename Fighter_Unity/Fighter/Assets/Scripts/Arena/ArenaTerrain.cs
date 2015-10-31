@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ArenaTerrain : MonoBehaviour {
 
@@ -39,19 +40,21 @@ public class ArenaTerrain : MonoBehaviour {
 		int index = 0;
 		float uvFactorX = 1.0f/widthSegments;
 		float uvFactorY = 1.0f/lengthSegments;
-		float scaleX = 1;
-		float scaleY = 1;
-		for (float y = 0.5f; y < vCount2; y++)
-		{
-			for (float x = 0.5f; x < hCount2; x++)
-			{
+		float scaleX = 10;
+		float scaleY = 10;
 
-				vertices[index] = new Vector3(x*scaleX - width/2f - anchorOffset.x,  Random.Range(0f, 0.5f), y*scaleY - length/2f - anchorOffset.y);
+		for (float y = 0f; y < vCount2; y++)
+		{
+			for (float x = 0f; x < hCount2; x++)
+			{
+				float ran = Random.Range(0f, 10.0f);
+				//float ran = 0;
+				vertices[index] = new Vector3(x*scaleX - width/2f - anchorOffset.x,  ran, y*scaleY - length/2f - anchorOffset.y);
 
 				uvs[index++] = new Vector2(x*uvFactorX, y*uvFactorY);
 			}
 		}
-		
+
 		index = 0;
 		for (int y = 0; y < lengthSegments; y++)
 		{
@@ -96,8 +99,8 @@ public class ArenaTerrain : MonoBehaviour {
 	{
 		float raycastHeight 						= 100f;
 		float raycastLength 						= 1000f;
-		float inFromBoarder 						= 0.5f;
-			Vector3 randomPositionAtRayCastHeight 		= new Vector3 (Random.Range(0f + inFromBoarder, (float)this.sizeX - inFromBoarder), raycastHeight, Random.Range(0 + inFromBoarder, (float)this.sizeY) - inFromBoarder);
+		float inFromBoarder 						= 1f;
+		Vector3 randomPositionAtRayCastHeight 		= new Vector3 (Random.Range(0f + inFromBoarder, (float)this.sizeX * 10 - inFromBoarder), raycastHeight, Random.Range(0 + inFromBoarder, (float)this.sizeY * 10) - inFromBoarder);
 		RaycastHit hit;
 
 		if (Physics.Raycast (randomPositionAtRayCastHeight, Vector3.down, out hit, raycastLength)) 
@@ -110,5 +113,7 @@ public class ArenaTerrain : MonoBehaviour {
 		}
 		return this.GetSpawnPoint ();
 	}
+
+
 }
 
