@@ -8,6 +8,7 @@ public class ArenaTerrain : MonoBehaviour {
 
 	public int sizeX;
 	public int sizeY;
+	public float MaxHeight;
 	void Awake () 
 	{
 
@@ -47,7 +48,7 @@ public class ArenaTerrain : MonoBehaviour {
 		{
 			for (float x = 0f; x < hCount2; x++)
 			{
-				float ran = Random.Range(0f, 10.0f);
+				float ran = Random.Range(0f, MaxHeight);
 				//float ran = 0;
 				vertices[index] = new Vector3(x*scaleX - width/2f - anchorOffset.x,  ran, y*scaleY - length/2f - anchorOffset.y);
 

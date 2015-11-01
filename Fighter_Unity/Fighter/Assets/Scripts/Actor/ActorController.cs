@@ -49,7 +49,8 @@ public class ActorController : GameObjectBaseScript {
 	public virtual void Tick()
 	{
 		if(Goal != Vector3.zero)
-		Movement.StepToPoint (Goal, 0.1f);
+			if(!Movement.StepToPoint (Goal, 0.1f))
+				Goal = Vector3.zero;
 	}
 	
 	public virtual void PostTick()

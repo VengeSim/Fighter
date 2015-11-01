@@ -64,8 +64,13 @@ public class Movement : ActorBaseScript {
 
 		ray = new Ray (positionOnRadius, Vector3.down);
 		//TODO Distance isnt accurate when crossing to a different Normal
-		if (Physics.Raycast (ray, out hit, rayCastLength)) 
+		if (Physics.Raycast (ray, out hit, rayCastLength, LayerMask.NameToLayer("Solid"))) 
 		{
+			if(Vector3.Distance(transform.position, goal) <= distance)
+			{
+				AlignToMeshNormal(hit);
+				return false;
+			};
 
 			Vector3 point = hit.point;
 			Vector3 normal = hit.normal.normalized;
